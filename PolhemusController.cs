@@ -112,7 +112,7 @@ public class PolhemusController : MonoBehaviour
         angularVelocityHistory = new Stack<Vector3>();
         for (int i = 0; i < 5; i++)
         {
-            angularVelocityHistory.Push();
+			angularVelocityHistory.Push(new Vector3());
         }
 
         startCounter = 0;
@@ -372,7 +372,7 @@ public class PolhemusController : MonoBehaviour
     //gets the timed average of the quaternion set it is given; 
     //calculates the average based on the new quaternion speed it is given at the current instance
     //form of euler angle returned is the angular velocity in degrees
-    private Quaternion averageQuaternionSpeed(Vector3 newQ, Stack<Vector3> quaternionHistory)
+    private Vector3 averageQuaternionSpeed(Vector3 newQ, Stack<Vector3> quaternionHistory)
     {
         quaternionHistory.Pop();
         quaternionHistory.Push(newQ);
@@ -381,8 +381,8 @@ public class PolhemusController : MonoBehaviour
         float totalSpeedsX = 0f;
         float totalSpeedsY = 0f;
         float totalSpeedsZ = 0f;
-        Stack<Quaternion> temp = new Stack<Vector3>(quaternionHistory);
-        foreach (Quaternion unit in temp)
+        Stack<Vector3> temp = new Stack<Vector3>(quaternionHistory);
+        foreach (Vector3 unit in temp)
         {
             totalSpeedsX += unit.x * Mathf.Rad2Deg;
             totalSpeedsY += unit.y * Mathf.Rad2Deg;
